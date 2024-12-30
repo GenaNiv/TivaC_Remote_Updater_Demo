@@ -8,11 +8,6 @@
 
 --retain=g_pfnVectors
 
-/*MEMORY
-{
-    FLASH (RX) : origin = 0x00000000, length = 0x00040000
-    SRAM (RWX) : origin = 0x20000000, length = 0x00008000
-}*/
 MEMORY
 {
     FLASH (RX) : origin = 0x00002800, length = 0x0000D800  /* Application starts after the bootloader */
