@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define variables
-CCS_WORKSPACE="$HOME/PROJECTS/EMBEDDED_PROJECTS/temp"  # CCS workspace directory
-REPO_PATH="$HOME/PROJECTS/EMBEDDED_PROJECTS/EmbeddedFirmwareProject/firmware"  # Root of the firmware projects
+CCS_WORKSPACE="$HOME/PROJECTS/EMBEDDED_PROJECTS/workspace"  # CCS workspace directory
+REPO_PATH="$HOME/PROJECTS/EMBEDDED_PROJECTS/GSE_ControlSystem"  # Root of the firmware projects
 CCS="/home/gena/ti/ccs1271/ccs/eclipse/ccstudio"  # Path to the CCS executable
 
 # Projects to import
