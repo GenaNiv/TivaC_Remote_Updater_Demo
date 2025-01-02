@@ -1,0 +1,17 @@
+name: Simple Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  simple-job:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Print Hello
+      run: |
+        echo "Hello, GitHub Actions on Self-Hosted Runner!"
