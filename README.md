@@ -53,6 +53,31 @@ The **GSE_ControlSystem** is a comprehensive project for managing firmware updat
 └── tools                  # Utilities and setup scripts
     └── ccs_project_setup.sh # Script to set up the CCS environment
 
+graph TD
+    subgraph Bootloader
+        A[Handles firmware update commands]
+        B[Programs and erases flash memory]
+        C[Switches to updated application]
+        D[Ensures integrity with validation]
+    end
+
+    subgraph LED Application
+        E[Toggles an LED]
+        F[Operates from memory address defined by Bootloader]
+    end
+
+    subgraph Firmware Updater (Host Application)
+        G[Sends PING, DOWNLOAD, SEND_DATA, RUN, RESET commands]
+        H[Retries failed transmissions]
+        I[Cross-platform: Linux, macOS, Windows]
+    end
+
+    Host -->|Command-based communication| Bootloader
+    Bootloader -->|Executes updated application| LED_Application
+    Firmware -->|Validates & Transfers Firmware| Bootloader
+    LED_Application -->|Visual demonstration via LED toggle| User
+
+
 Getting Started
 Prerequisites
 Hardware:
