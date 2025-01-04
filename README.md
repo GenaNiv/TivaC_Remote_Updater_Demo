@@ -12,26 +12,25 @@ The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating
 
 ### Bootloader
 - **Firmware Update via UART**:
-  - Handles firmware update commands from the host.
-  - Erases and programs flash memory securely.
+  - Handles commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
+  - Manages flash programming and erasure.
 - **Application Switching**:
-  - Automatically switches to the updated application after programming.
+  - Transfers control to the updated application.
 - **Fault Handling**:
-  - Validates firmware integrity during the update process.
+  - Validates firmware integrity during updates.
 
 ### LED Application
-- **Basic Functionality**:
-  - Demonstrates GPIO usage by toggling an LED.
+- **GPIO Demonstration**:
+  - Toggles an LED to verify functionality.
 - **Configurable Memory Location**:
-  - Operates from a memory address determined by the bootloader.
+  - Defined by the bootloader for separation.
 
-### Remote Firmware Updater (Host Application)
-- **Command-Based Communication**:
-  - Supports commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
-- **Error Recovery**:
-  - Retries failed transmissions to ensure reliable updates.
+### Firmware Updater
 - **Cross-Platform**:
-  - Written in Python, compatible with Linux, macOS, and Windows.
+  - Python-based, runs on Linux, macOS, and Windows.
+- **Command-Based Communication**:
+  - Reliable transfer with retry mechanisms.
+  - Handles commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
 
 ---
 
@@ -51,59 +50,62 @@ The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating
 │   └── uart_handler.py    # Handles UART communication
 └── tools                  # Utilities and setup scripts
     └── ccs_project_setup.sh # CCS environment setup script
+```
 
+## Memory Map Explanation
 
-graph TD
-    subgraph Bootloader
-        A[Handles firmware update commands]
-        B[Programs and erases flash memory]
-        C[Switches to updated application]
-        D[Ensures integrity with validation]
-    end
+### Memory Layout
+| Address Range  | Section                     | Description                                 |
+|----------------|-----------------------------|---------------------------------------------|
+| `0x0000_0000`  | Bootloader Vector Table     | Initial entry point and ISR table.          |
+| `0x0000_2800`  | Application Start           | Memory location for the LED application.    |
+| `0x2000_0000`  | SRAM                        | Shared memory for stack and heap.           |
 
-    subgraph LED Application
-        E[Toggles an LED]
-        F[Operates from memory address defined by Bootloader]
-    end
+### Bootloader and Application Interaction
+- The bootloader checks for update signals in SRAM.
+- Upon successful update, control is transferred to the application at `0x0000_2800`.
 
-    subgraph Firmware Updater (Host Application)
-        G[Sends PING, DOWNLOAD, SEND_DATA, RUN, RESET commands]
-        H[Retries failed transmissions]
-        I[Cross-platform: Linux, macOS, Windows]
-    end
+---
 
-    Host -->|Command-based communication| Bootloader
-    Bootloader -->|Executes updated application| LED_Application
-    Firmware -->|Validates & Transfers Firmware| Bootloader
-    LED_Application -->|Visual demonstration via LED toggle| User
+## Getting Started
 
+### Prerequisites
+**Hardware:**
+- Tiva C microcontroller (e.g., TM4C123GH6PM).
 
-Getting Started
-Prerequisites
-Hardware:
-Tiva C Series microcontroller (TM4C123GH6PM or equivalent).
-Software:
-Code Composer Studio (CCS)
-Python 3.x with the pyserial library installed.
+**Software:**
+- Code Composer Studio (CCS)
+- TivaWARE
+- Python 3.x with `pyserial`
 
-Setup
-Clone this repository:
-git clone https://github.com/your-username/GSE_ControlSystem.git
-cd GSE_ControlSystem
+### Setup
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/<your-username>/TivaC_Firmware_Update_Demo.git
+    cd TivaC_Firmware_Update_Demo
+    ```
 
-Set up the CCS workspace using the provided script:
-bash tools/ccs_project_setup.sh
+2. Set up the CCS workspace:
+    ```bash
+    bash tools/ccs_project_setup.sh
+    ```
 
-Build the bootloader and LED application projects in CCS.
+3. Build the `bootloader` and `led_application` projects in CCS.
 
-Program the bootloader to the target device using CCS.
+---
 
-Usage
-Update Firmware:
-Use the main.py script in the firmware_updater directory to send firmware to the target device.
-bash
-Copy code
-python3 firmware_updater/main.py
-Observe Behavior:
-The bootloader switches to the LED application upon successful update.
-Verify the LED toggles as expected.
+## Usage
+
+### Running the Firmware Updater
+1. Use the `main.py` script to update firmware:
+    ```bash
+    python3 firmware_updater/main.py
+    ```
+
+### Observe Behavior
+**LED Application:**
+- The bootloader transfers control to the application after a successful update.
+- The LED toggles as programmed.
+
+**Error Recovery:**
+- The updater retries commands to ensure robust communication.
