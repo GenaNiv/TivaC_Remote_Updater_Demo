@@ -1,57 +1,57 @@
-# GSE_ControlSystem
+# TivaC_RemoteUpdater_Demo
 
 ## Overview
-The **GSE_ControlSystem** is a comprehensive project for managing firmware updates and controlling embedded devices. This project includes a bootloader, a demo application, and a host firmware updater to simplify and streamline firmware update processes.
+The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating firmware on Tiva C Series microcontrollers. This project demonstrates:
+1. A **bootloader** for secure and efficient firmware updates.
+2. An **LED application** to demonstrate GPIO functionality.
+3. A Python-based **remote firmware updater** for seamless communication between the host and target.
 
 ---
 
 ## Features
+
 ### Bootloader
 - **Firmware Update via UART**:
   - Handles firmware update commands from the host.
-  - Programs and erases flash memory.
+  - Erases and programs flash memory securely.
 - **Application Switching**:
-  - Executes the updated application after firmware programming.
+  - Automatically switches to the updated application after programming.
 - **Fault Handling**:
-  - Ensures integrity during the firmware update process with validation mechanisms.
+  - Validates firmware integrity during the update process.
 
 ### LED Application
 - **Basic Functionality**:
   - Demonstrates GPIO usage by toggling an LED.
 - **Configurable Memory Location**:
-  - Operates from a memory address defined by the bootloader.
+  - Operates from a memory address determined by the bootloader.
 
-### Firmware Updater (Host Application)
+### Remote Firmware Updater (Host Application)
 - **Command-Based Communication**:
-  - Supports commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN` and `RESET`.
+  - Supports commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
 - **Error Recovery**:
-  - Retries failed transmissions for robust updates.
+  - Retries failed transmissions to ensure reliable updates.
 - **Cross-Platform**:
-  - Python-based, runs on Linux, macOS, and Windows.
-
-### Tools
-- **Automation**:
-  - Includes scripts for setting up Code Composer Studio (CCS) projects.
-- **Simplified Development**:
-  - Workspace and environment setup scripts to streamline onboarding.
+  - Written in Python, compatible with Linux, macOS, and Windows.
 
 ---
 
 ## Project Structure
+
 ```plaintext
 .
-├── bootloader             # Source code for the custom bootloader
+├── bootloader             # Source code for the bootloader
 │   ├── Debug              # Build artifacts
 │   └── targetConfigs      # Target configuration files
 ├── led_application        # Source code for the LED application
 │   ├── Debug              # Build artifacts
 │   └── targetConfigs      # Target configuration files
-├── firmware_updater       # Python-based host application for firmware updates
+├── firmware_updater       # Python-based host application
 │   ├── main.py            # Entry point for the updater
-│   ├── packet_handler.py  # Handles communication with the bootloader
-│   └── uart_handler.py    # Manages UART communication
+│   ├── packet_handler.py  # Manages communication with the bootloader
+│   └── uart_handler.py    # Handles UART communication
 └── tools                  # Utilities and setup scripts
-    └── ccs_project_setup.sh # Script to set up the CCS environment
+    └── ccs_project_setup.sh # CCS environment setup script
+
 
 graph TD
     subgraph Bootloader
