@@ -10,6 +10,13 @@ The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating
 
 ## Features
 
+### Firmware Updater
+- **Cross-Platform**:
+  - Python-based, runs on Linux, macOS, and Windows.
+- **Command-Based Communication via UART**:
+  - Reliable transfer with retry mechanisms.
+  - Handles commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
+
 ### Bootloader
 - **Firmware Update via UART**:
   - Handles commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
@@ -24,14 +31,6 @@ The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating
   - Toggles an LED to verify functionality.
 - **Configurable Memory Location**:
   - Defined by the bootloader for separation.
-
-### Firmware Updater
-- **Cross-Platform**:
-  - Python-based, runs on Linux, macOS, and Windows.
-- **Command-Based Communication**:
-  - Reliable transfer with retry mechanisms.
-  - Handles commands like `PING`, `DOWNLOAD`, `SEND_DATA`, `RUN`, and `RESET`.
-
 ---
 
 ## Project Structure
