@@ -109,3 +109,10 @@ The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating
 
 **Error Recovery:**
 - The updater retries commands to ensure robust communication.
+
+
+## System Architecture
+
+The following diagram illustrates the system architecture:
+
+![System Architecture](docs/system_architecture.png)
