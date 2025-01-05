@@ -2,9 +2,9 @@
 
 ## Overview
 The **TivaC_RemoteUpdater_Demo** showcases a robust system for remotely updating firmware on Tiva C Series microcontrollers. This project demonstrates:
-1. A **bootloader** for secure and efficient firmware updates.
-2. An **LED application** to demonstrate GPIO functionality.
-3. A Python-based **remote firmware updater** for seamless communication between the host and target.
+1. A Python-based **remote firmware updater** for seamless communication between the host and target via UART.
+2. A **bootloader** for secure and efficient firmware updates.
+3. An **LED application** to demonstrate GPIO functionality.
 
 ---
 
