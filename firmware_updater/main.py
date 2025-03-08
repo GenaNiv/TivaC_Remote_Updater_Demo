@@ -1,3 +1,5 @@
+import time
+
 from uart_handler import UARTHandler
 from packet_handler import PacketHandler
 
@@ -28,7 +30,7 @@ if __name__ == "__main__":
 
         # Step 2: Prepare firmware data
         firmware_address = 0x2800  # APP_START_ADDRESS
-        firmware_file = "/home/gena/PROJECTS/EMBEDDED_PROJECTS/GSE_ControlSystem/firmware_updater/blink_led.bin"
+        firmware_file = "/home/gena/PROJECTS/EMBEDDED_PROJECTS/TivaC_Remote_Updater_Demo/firmware_updater/blink_led.bin"
 
         print(f"Reading firmware from: {firmware_file}")
         try:
@@ -52,6 +54,7 @@ if __name__ == "__main__":
         # Step 4: Transfer firmware in chunks
         chunk_size = 64  # Maximum chunk size
         for i in range(0, len(firmware_data), chunk_size):
+            time.sleep(1)
             chunk = firmware_data[i:i + chunk_size]
             print(f"Sending chunk {i // chunk_size + 1} of size {len(chunk)} bytes...")
             if not packet_handler.handle_send_data(chunk):
